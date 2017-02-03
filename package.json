@@ -15,7 +15,9 @@
   "devDependencies": {
     "browser-sync": "^2.18.7",
     "gulp-plumber": "^1.1.0",
-    "gulp-pug": "^3.2.0"
+    "gulp-pug": "^3.2.0",
+    "gulp-sourcemaps": "^2.4.0",
+    "gulp-zip": "^4.0.0"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
