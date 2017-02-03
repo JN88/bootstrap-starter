@@ -2,9 +2,14 @@ var gulp = require('gulp');
 var plumber = require('gulp-plumber');
 var less = require('gulp-less');
 var pug = require('gulp-pug');
+var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync').create();
+const zip = require('gulp-zip');
 
-//
+/*=============================================
+=            Update Bootstrap Core            =
+=============================================*/
+
 gulp.task('bwt-less', function() {
 	return gulp.src('./node_modules/bootstrap/less/**/*.less')
 	.pipe(gulp.dest('./app/less/bootstrap/'));
@@ -17,6 +22,19 @@ gulp.task('bwt-fonts', function() {
 	return gulp.src('./node_modules/bootstrap/fonts/*.*')
 	.pipe(gulp.dest('./app/fonts/bootstrap/'));
 });
+
+/*----------  Task Update  ----------*/
+
+gulp.task('update-bootstrap', ['bwt-less', 'bwt-js', 'bwt-fonts'], function () {
+    console.log("\n [>] Integrated Bootstrap DONE ^.^ \n");
+});
+
+/*=====  End of Update Bootstrap Core  ======*/
+
+
+/*====================================
+=            Task for DEV            =
+====================================*/
 
 gulp.task('views', function buildHTML() {
 	return gulp.src('./app/source/*.pug')
@@ -31,14 +49,17 @@ gulp.task('views', function buildHTML() {
 gulp.task('styles', function() {
     return gulp.src('./app/less/*.less')
     .pipe(plumber())
-	.pipe(less())
+	.pipe(less({
+		sourceMap: {
+			sourceMapRootpath: './app/less'
+		}
+	}))
+	.pipe(sourcemaps.write())
     .pipe(gulp.dest('./app/css/'))
     .pipe(browserSync.stream());
 });
 
-gulp.task('update-bwt', ['bwt-less', 'bwt-js', 'bwt-fonts'], function () {
-    console.log("\n [>] Integrated Bootstrap DONE ^.^\n");
-});
+/*----------  Task Build DEV MODE  ----------*/
 
 gulp.task('dev',['views', 'styles'], function() {
 	browserSync.init({
@@ -49,3 +70,50 @@ gulp.task('dev',['views', 'styles'], function() {
     gulp.watch('./app/less/**/*.less', ['styles']);
     gulp.watch(".app/*.html").on('change', browserSync.reload);
 });
+
+/*=====  End of Task for DEV  ======*/
+
+
+/*===========================================
+=            TASK  FOR DIST MODE            =
+===========================================*/
+
+gulp.task('puplic', function() {
+    gulp.src('./app/less/*.less')
+    .pipe(plumber())
+	.pipe(less())
+    .pipe(gulp.dest('./dist/css/'));
+
+    gulp.src('./app/*.html')
+	.pipe(gulp.dest('./dist/'));
+
+	gulp.src('./app/js/**/**')
+	.pipe(gulp.dest('./dist/js/'));
+
+	gulp.src('./app/fonts/**')
+	.pipe(gulp.dest('./dist/fonts/'));
+
+	gulp.src('./app/ico/**')
+	.pipe(gulp.dest('./dist/ico/'));
+
+	gulp.src('./app/images/**')
+	.pipe(gulp.dest('./dist/images/'));
+
+	gulp.src('./dist/*')
+        .pipe(zip('dist.zip'))
+        .pipe(gulp.dest('./'))
+});
+
+gulp.task('all', function() {
+	gulp.src(['!app/less', '!app/source', './app/**' ])
+	.pipe(gulp.dest('./dist'));
+});
+
+gulp.task('dist',['views', 'styles', 'puplic'], function() {
+   browserSync.init({
+		server: "./dist/"
+	});
+});
+
+/*=====  End of TASK  FOR DIST MODE  ======*/
+

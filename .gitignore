@@ -49,7 +49,7 @@ dist/
 .classpath
 .project
 
-app/**/*.html
+app/*.html
 app/less/bootstrap/**
 app/js/bootstrap/**
 app/fonts/bootstrap/**
