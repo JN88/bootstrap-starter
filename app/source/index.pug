@@ -1,0 +1,17 @@
+extends layouts/layout-default.pug
+
+block config
+    - var title = 'Home Page'
+
+block content
+    .jumbotron
+        h1 Hello, world!
+        p This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
+        p: a.btn.btn-primary.btn-lg(href='#', role='button') Learn more
+
+    .row
+        .col-md-6
+            img.img-responsive(src="images/logo.png" alt="logo" data-src="holder.js/438x200?bg=#ebebeb&fg=#8cb988")
+        .col-md-6
+            h4 Lorem ipsum dolor sit amet
+            p Consectetur adipisicing elit. Tempore facilis laudantium molestiae. Id rerum commodi officia distinctio natus eius veritatis, praesentium, aspernatur libero sunt, voluptatibus, eveniet aliquid voluptas quam omnis.

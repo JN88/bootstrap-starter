@@ -1,0 +1,25 @@
+{
+  "name": "bootstrap-stater",
+  "version": "1.0.0",
+  "description": "Boostrap Stater based on Bootstrap Framework end exntend with more functions and utilities to quick start your project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bootstrap",
+    "front-end"
+  ],
+  "author": "jn88",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.18.7",
+    "gulp-plumber": "^1.1.0",
+    "gulp-pug": "^3.2.0"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.3.0"
+  }
+}

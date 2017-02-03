@@ -1,0 +1,33 @@
+//
+// MIXINS
+// --------------------------------------------------
+// Init Hook Mixins
+.hook-common-style(){};
+.hook-screen-sm-min(){};
+.hook-screen-md-min(){};
+.hook-screen-lg-min(){};
+.hook-screen-md-max(){};
+.hook-screen-sm-max(){};
+.hook-screen-xs-max(){};
+
+// MIXIN: Set Postion
+// --------------------------------------------------
+.pos-center-center(@position: absolute){
+	position: @position;
+	top: 50%;
+	left: 50%;
+	.translate(-50%, -50%);
+}
+// MIXIN: Set Link Color
+// --------------------------------------------------
+.link-color(@color: @link-color, @colorHover: @link-hover-color){
+	color: @color;
+	&:hover {
+		color: @colorHover;
+	}
+}
+
+//
+// MIXIN: MIXINS for this Project
+// --------------------------------------------------//
+// Write new mixin for project here...

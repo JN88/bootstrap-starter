@@ -1,0 +1,19 @@
+doctype html
+block config
+html
+	include ../includes/head.pug
+	body
+		header#header.site-header
+			include ../includes/header.pug
+		main#main.site-main
+			.container
+				.row
+					.col-md-9
+						section.main-content
+							block content
+					.col-md-3
+						aside.sidebar.sidebar-right
+							include ../includes/sidebar.pug
+		footer#footer.site-footer
+			include ../includes/footer.pug
+		include ../includes/bottom.pug
