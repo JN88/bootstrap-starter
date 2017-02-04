@@ -1,8 +1,9 @@
 doctype html
 block config
-html
+html(class="no-js" lang="en")
 	include ../includes/head.pug
 	body
+		block begin-body
 		header#header.site-header
 			include ../includes/header.pug
 		main#main.site-main
@@ -17,3 +18,4 @@ html
 		footer#footer.site-footer
 			include ../includes/footer.pug
 		include ../includes/bottom.pug
+		block end-body

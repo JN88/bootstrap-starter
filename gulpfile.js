@@ -11,17 +11,24 @@ const zip = require('gulp-zip');
 =============================================*/
 
 gulp.task('bwt-less', function() {
-	return gulp.src('./node_modules/bootstrap/less/**/*.less')
-	.pipe(gulp.dest('./app/less/bootstrap/'));
+	return gulp.src('node_modules/bootstrap/less/**/*.less')
+	.pipe(gulp.dest('app/less/bootstrap/'));
 });
 gulp.task('bwt-js', function() {
-	return gulp.src('./node_modules/bootstrap/dist/js/bootstrap.min.js')
-	.pipe(gulp.dest('./app/js/bootstrap/'));
+	return gulp.src('node_modules/bootstrap/dist/js/bootstrap.min.js')
+	.pipe(gulp.dest('app/js/bootstrap/'));
 });
 gulp.task('bwt-fonts', function() {
-	return gulp.src('./node_modules/bootstrap/fonts/*.*')
-	.pipe(gulp.dest('./app/fonts/bootstrap/'));
+	return gulp.src('node_modules/bootstrap/fonts/*.*')
+	.pipe(gulp.dest('app/fonts/bootstrap/'));
 });
+gulp.task('font-awesome', function() {
+    gulp.src('node_modules/font-awesome/fonts/**/*')
+		.pipe(gulp.dest('app/fonts/font-awesome/'));
+    gulp.src('node_modules/font-awesome/less/**/*')
+        .pipe(gulp.dest('app/less/font-awesome/'));
+});
+
 
 /*----------  Task Update  ----------*/
 
@@ -37,25 +44,25 @@ gulp.task('update-bootstrap', ['bwt-less', 'bwt-js', 'bwt-fonts'], function () {
 ====================================*/
 
 gulp.task('views', function buildHTML() {
-	return gulp.src('./app/source/*.pug')
+	return gulp.src('app/source/*.pug')
 	.pipe(plumber())
 	.pipe(pug({
 		pretty: true
 	}))
-	.pipe(gulp.dest('./app'))
+	.pipe(gulp.dest('app'))
 	.pipe(browserSync.stream());
 });
 
 gulp.task('styles', function() {
-    return gulp.src('./app/less/*.less')
+    return gulp.src('app/less/*.less')
     .pipe(plumber())
 	.pipe(less({
 		sourceMap: {
-			sourceMapRootpath: './app/less'
+			sourceMapRootpath: 'app/less'
 		}
 	}))
 	.pipe(sourcemaps.write())
-    .pipe(gulp.dest('./app/css/'))
+    .pipe(gulp.dest('app/css/'))
     .pipe(browserSync.stream());
 });
 
@@ -63,12 +70,14 @@ gulp.task('styles', function() {
 
 gulp.task('dev',['views', 'styles'], function() {
 	browserSync.init({
-		server: "./app/"
+		server: "app/"
 	});
 
-    gulp.watch('./app/source/**/*.pug', ['views']);
-    gulp.watch('./app/less/**/*.less', ['styles']);
-    gulp.watch(".app/*.html").on('change', browserSync.reload);
+    gulp.watch('app/source/**/*.pug', ['views']);
+    gulp.watch('app/less/**/*.less', ['styles']);
+    // Reload the browser whenever HTML or JS Files Change
+    gulp.watch('app/js/**/*.js', browserSync.reload);
+    gulp.watch("app/*.html", browserSync.reload);
 });
 
 /*=====  End of Task for DEV  ======*/
@@ -78,40 +87,40 @@ gulp.task('dev',['views', 'styles'], function() {
 =            TASK  FOR DIST MODE            =
 ===========================================*/
 
-gulp.task('puplic', function() {
-    gulp.src('./app/less/*.less')
+gulp.task('public', function() {
+    gulp.src('app/less/*.less')
     .pipe(plumber())
 	.pipe(less())
-    .pipe(gulp.dest('./dist/css/'));
+    .pipe(gulp.dest('dist/css/'));
 
-    gulp.src('./app/*.html')
-	.pipe(gulp.dest('./dist/'));
+    gulp.src('app/*.html')
+	.pipe(gulp.dest('dist/'));
 
-	gulp.src('./app/js/**/**')
-	.pipe(gulp.dest('./dist/js/'));
+	gulp.src('app/js/**/**')
+	.pipe(gulp.dest('dist/js/'));
 
-	gulp.src('./app/fonts/**')
-	.pipe(gulp.dest('./dist/fonts/'));
+	gulp.src('app/fonts/**')
+	.pipe(gulp.dest('dist/fonts/'));
 
-	gulp.src('./app/ico/**')
-	.pipe(gulp.dest('./dist/ico/'));
+	gulp.src('app/ico/**')
+	.pipe(gulp.dest('dist/ico/'));
 
-	gulp.src('./app/images/**')
-	.pipe(gulp.dest('./dist/images/'));
+	gulp.src('app/images/**')
+	.pipe(gulp.dest('dist/images/'));
 
-	gulp.src('./dist/*')
+	gulp.src('dist/*')
         .pipe(zip('dist.zip'))
-        .pipe(gulp.dest('./'))
+        .pipe(gulp.dest(''))
 });
 
 gulp.task('all', function() {
-	gulp.src(['!app/less', '!app/source', './app/**' ])
-	.pipe(gulp.dest('./dist'));
+	gulp.src(['!app/less', '!app/source', 'app/**' ])
+	.pipe(gulp.dest('dist'));
 });
 
 gulp.task('dist',['views', 'styles', 'puplic'], function() {
    browserSync.init({
-		server: "./dist/"
+		server: "dist/"
 	});
 });
 
