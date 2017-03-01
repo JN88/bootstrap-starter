@@ -29,14 +29,38 @@ gulp.task('font-awesome', function() {
         .pipe(gulp.dest('app/less/font-awesome/'));
 });
 
-
 /*----------  Task Update  ----------*/
 
 gulp.task('update-bootstrap', ['bwt-less', 'bwt-js', 'bwt-fonts'], function () {
-    console.log("\n [>] Integrated Bootstrap DONE ^.^ \n");
+    console.log("\n [>] Update Bootstrap DONE ^.^ \n");
 });
 
 /*=====  End of Update Bootstrap Core  ======*/
+
+
+/*===========================================
+=            Update Font-Awesome            =
+===========================================*/
+gulp.task('fa-less', function() {
+	return gulp.src('node_modules/font-awesome/less/**/*.less')
+	.pipe(gulp.dest('app/less/font-awesome/'));
+});
+gulp.task('fa-fonts', function() {
+	return gulp.src('node_modules/font-awesome/fonts/*.*')
+	.pipe(gulp.dest('app/fonts/font-awesome/'));
+});
+
+/*----------  Task Update  ----------*/
+
+gulp.task('update-fontawesome', ['fa-less', 'fa-fonts'], function () {
+    console.log("\n [>] Update Font-Awesome DONE ^.^ \n");
+});
+
+/*=====  End of Update Font-Awesome  ======*/
+
+
+
+
 
 
 /*====================================
