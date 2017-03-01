@@ -50,7 +50,3 @@ dist/
 .project
 
 app/*.html
-app/less/bootstrap/**
-app/js/bootstrap/**
-app/fonts/bootstrap/**
-
