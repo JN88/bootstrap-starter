@@ -59,10 +59,6 @@ gulp.task('update-fontawesome', ['fa-less', 'fa-fonts'], function () {
 /*=====  End of Update Font-Awesome  ======*/
 
 
-
-
-
-
 /*====================================
 =            Task for DEV            =
 ====================================*/
@@ -99,6 +95,7 @@ gulp.task('dev',['views', 'styles'], function() {
 
     gulp.watch('app/source/**/*.pug', ['views']);
     gulp.watch('app/less/**/*.less', ['styles']);
+
     // Reload the browser whenever HTML or JS Files Change
     gulp.watch('app/js/**/*.js', browserSync.reload);
     gulp.watch("app/*.html", browserSync.reload);
@@ -135,11 +132,6 @@ gulp.task('public', function() {
 	gulp.src('dist/*')
         .pipe(zip('dist.zip'))
         .pipe(gulp.dest(''))
-});
-
-gulp.task('all', function() {
-	gulp.src(['!app/less', '!app/source', 'app/**' ])
-	.pipe(gulp.dest('dist'));
 });
 
 gulp.task('dist',['views', 'styles', 'puplic'], function() {
