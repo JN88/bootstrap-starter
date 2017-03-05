@@ -40,6 +40,10 @@ gulp.task('update-bootstrap', ['bwt-less', 'bwt-js', 'bwt-fonts'], function () {
     console.log("\n [>] Update Bootstrap DONE ^.^ \n");
 });
 
+gulp.task('install', ['update-bootstrap'], function() {
+	console.log("\n [>] Install project DONE ^.^ \n");
+});
+
 /*=====  End of Update Bootstrap Core  ======*/
 
 
@@ -56,13 +60,8 @@ gulp.task('fa-fonts', function() {
 });
 
 /*----------  Task Update  ----------*/
-gulp.task('use-fontawesome', ['fa-less', 'fa-fonts'], function () {
-    console.log("\n [>] Intergrated Font-Awesome DONE ^.^ \n");
-});
-
-gulp.task('update-fontawesome', ['fa-less', 'fa-fonts'], function () {
-    console.log("\n [>] Update Font-Awesome DONE ^.^ \n");
-});
+gulp.task('use-fontawesome', ['fa-less', 'fa-fonts'], function () {});
+gulp.task('update-fontawesome', ['fa-less', 'fa-fonts'], function () {});
 
 /*=====  End of Update Font-Awesome  ======*/
 
@@ -94,9 +93,12 @@ gulp.task('styles', function() {
     .pipe(browserSync.stream());
 });
 
+
+gulp.task('build', ['views', 'styles'], function(){});
+
 /*----------  Task Build DEV MODE  ----------*/
 
-gulp.task('dev',['views', 'styles'], function() {
+gulp.task('dev',['build'], function() {
 	browserSync.init({
 		server: "app/",
 		//reloadDelay: 1000,
@@ -121,7 +123,7 @@ gulp.task('clean:dist', function() {
   return del.sync(['dist', 'dist.zip']);
 })
 
-gulp.task('pre-build',['clean:dist', 'views', 'styles'] , function(){
+gulp.task('pre-build',['build'] , function(){
     gulp.src('app/*.html')
 	    .pipe(useref())
 	    .pipe(gulpif('app/js/*.js', uglify()))
@@ -146,12 +148,9 @@ gulp.task('build-zip', function() {
 
 });
 
-gulp.task('public',['pre-build', 'build-zip'] , function() {
+gulp.task('public',['pre-build', 'build-zip'] , function() {});
 
-
-});
-
-gulp.task('dist',['views', 'styles', 'puplic'], function() {
+gulp.task('dist',['pre-build'], function() {
    browserSync.init({
 		server: "dist/"
 	});

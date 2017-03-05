@@ -15,6 +15,12 @@ Install the dependencies:
 npm install
 ```
 
+### Install Project
+Default will intergrade Bootstrap latest vertion
+```sh
+gulp install
+```
+
 ### Develop
 Run command below to work:
 ```sh
@@ -34,13 +40,13 @@ gulp user-fontawesome
 ```
 
 ### Update Font-Awesome
-update Font-Awesome latest vertion:
+Update Font-Awesome latest vertion:
 ```sh
 gulp update-fontawesome
 ```
 
 ### Build Dist
-To build dist:
+Create dist folder and dist.zip
 ```sh
 gulp public
 ```
