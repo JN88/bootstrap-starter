@@ -1,11 +1,16 @@
-var gulp = require('gulp');
-var plumber = require('gulp-plumber');
-var less = require('gulp-less');
-var pug = require('gulp-pug');
-var sourcemaps = require('gulp-sourcemaps');
-var browserSync = require('browser-sync').create();
-const zip = require('gulp-zip');
+var gulp = require('gulp'),
+	plumber = require('gulp-plumber'),
+	less = require('gulp-less'),
+    minifyCss = require('gulp-clean-css'),
+	pug = require('gulp-pug'),
+	sourcemaps = require('gulp-sourcemaps'),
+    useref = require('gulp-useref'),
+    gulpif = require('gulp-if'),
+    uglify = require('gulp-uglify'),
+    del = require('del'),
+	browserSync = require('browser-sync').create();
 
+const zip = require('gulp-zip');
 /*=============================================
 =            Update Bootstrap Core            =
 =============================================*/
@@ -51,6 +56,9 @@ gulp.task('fa-fonts', function() {
 });
 
 /*----------  Task Update  ----------*/
+gulp.task('use-fontawesome', ['fa-less', 'fa-fonts'], function () {
+    console.log("\n [>] Intergrated Font-Awesome DONE ^.^ \n");
+});
 
 gulp.task('update-fontawesome', ['fa-less', 'fa-fonts'], function () {
     console.log("\n [>] Update Font-Awesome DONE ^.^ \n");
@@ -90,7 +98,8 @@ gulp.task('styles', function() {
 
 gulp.task('dev',['views', 'styles'], function() {
 	browserSync.init({
-		server: "app/"
+		server: "app/",
+		//reloadDelay: 1000,
 	});
 
     gulp.watch('app/source/**/*.pug', ['views']);
@@ -108,30 +117,38 @@ gulp.task('dev',['views', 'styles'], function() {
 =            TASK  FOR DIST MODE            =
 ===========================================*/
 
-gulp.task('public', function() {
-    gulp.src('app/less/*.less')
-    .pipe(plumber())
-	.pipe(less())
-    .pipe(gulp.dest('dist/css/'));
+gulp.task('clean:dist', function() {
+  return del.sync(['dist', 'dist.zip']);
+})
 
+gulp.task('pre-build',['clean:dist', 'views', 'styles'] , function(){
     gulp.src('app/*.html')
-	.pipe(gulp.dest('dist/'));
-
-	gulp.src('app/js/**/**')
-	.pipe(gulp.dest('dist/js/'));
+	    .pipe(useref())
+	    .pipe(gulpif('app/js/*.js', uglify()))
+	    .pipe(gulpif('app/css/*.css', minifyCss()))
+	    .pipe(gulp.dest('dist'));
 
 	gulp.src('app/fonts/**')
-	.pipe(gulp.dest('dist/fonts/'));
+		.pipe(gulp.dest('dist/fonts/'));
 
 	gulp.src('app/ico/**')
-	.pipe(gulp.dest('dist/ico/'));
+		.pipe(gulp.dest('dist/ico/'));
 
-	gulp.src('app/images/**')
-	.pipe(gulp.dest('dist/images/'));
+	gulp.src('app/imgs/**')
+		.pipe(gulp.dest('dist/imgs/'));
+});
 
-	gulp.src('dist/*')
-        .pipe(zip('dist.zip'))
-        .pipe(gulp.dest(''))
+gulp.task('build-zip', function() {
+
+	return gulp.src('dist/*')
+	    .pipe(zip('./dist.zip'))
+	    .pipe(gulp.dest('./'));
+
+});
+
+gulp.task('public',['pre-build', 'build-zip'] , function() {
+
+
 });
 
 gulp.task('dist',['views', 'styles', 'puplic'], function() {

@@ -15,21 +15,31 @@ Install the dependencies:
 npm install
 ```
 
+### Develop
 Run command below to work:
 ```sh
 gulp dev
 ```
 
+### Update Bootstrap
 Update bootstrap latest vertion:
 ```sh
 gulp update-bootstrap
 ```
 
-Update Font-Awesome latest vertion:
+### Intergrade Font-Awesome
+Intergrade Font-Awesome latest vertion:
+```sh
+gulp user-fontawesome
+```
+
+### Update Font-Awesome
+update Font-Awesome latest vertion:
 ```sh
 gulp update-fontawesome
 ```
 
+### Build Dist
 To build dist:
 ```sh
 gulp public
