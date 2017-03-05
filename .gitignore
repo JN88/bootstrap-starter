@@ -52,3 +52,5 @@ dist/
 app/*.html
 app/css/*.css
 app/js/bootstrap
+app/fonts/bootstrap
+app/fonts/font-awesome
