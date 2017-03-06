@@ -123,13 +123,15 @@ gulp.task('clean:dist', function() {
   return del.sync(['dist', 'dist.zip']);
 })
 
-gulp.task('pre-build',['build'] , function(){
-    gulp.src('app/*.html')
-	    .pipe(useref())
-	    .pipe(gulpif('app/js/*.js', uglify()))
-	    .pipe(gulpif('app/css/*.css', minifyCss()))
-	    .pipe(gulp.dest('dist'));
+gulp.task('minify-css-js', function() {
+	return gulp.src('app/*.html')
+		.pipe(useref())
+		.pipe(gulpif('*.js', uglify()))
+		.pipe(gulpif('*.css', minifyCss()))
+		.pipe(gulp.dest('dist'));
+})
 
+gulp.task('pre-build',['clean:dist', 'views', 'styles', 'minify-css-js'] , function(){
 	gulp.src('app/fonts/**')
 		.pipe(gulp.dest('dist/fonts/'));
 
@@ -148,9 +150,9 @@ gulp.task('build-zip', function() {
 
 });
 
-gulp.task('public',['pre-build', 'build-zip'] , function() {});
+gulp.task('public',['pre-build'] , function() {});
 
-gulp.task('dist',['pre-build'], function() {
+gulp.task('dist',['build', 'public'], function() {
    browserSync.init({
 		server: "dist/"
 	});
