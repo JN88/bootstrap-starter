@@ -3,7 +3,7 @@
 Supper-Bootstrap be build base on the framework [Twitter Bootstrap] and integrated [Font Awesome] with latest vertion.
 
 ### Featured Gulp Packages using
-[gulp-pug], [gulp-less], [browser-sync], [gulp-plumber], [gulp-cssmin]
+[gulp-pug], [gulp-less], [browser-sync], [gulp-plumber], [gulp-cssmin], [gulp.spritesmith]
 
 ### Installation
 
@@ -36,13 +36,33 @@ gulp update-bootstrap
 ### Intergrade Font-Awesome
 Intergrade Font-Awesome latest vertion:
 ```sh
-gulp user-fontawesome
+gulp install-fa
 ```
 
-### Update Font-Awesome
 Update Font-Awesome latest vertion:
 ```sh
-gulp update-fontawesome
+gulp update-fa
+```
+
+### Config auto build sprites image
+Open file gulpfile.js find and remove comment
+```js
+//gulp.watch('app/imgs/sprites/**/*.png', ['sprites']);
+```
+
+Open file style.less find and remove comment
+```less
+//@import "sprites/sprites.less";
+```
+
+Open file main.less find and remove comment
+```less
+// Init Sprites Style
+//[class^="icon-"] {
+//	display: inline-block;
+//	vertical-align: middle;
+//}
+//.sprites(@spritesheet-sprites);
 ```
 
 ### Build Dist
@@ -55,6 +75,8 @@ gulp public
 [Twitter Bootstrap]: <http://getbootstrap.com/>
 [browser-sync]: <https://www.npmjs.com/package/browser-sync]>
 [Gulp]: <http://gulpjs.com>
+[gulp-pug]: <https://www.npmjs.com/package/gulp-pug>
 [gulp-plumber]: <https://www.npmjs.com/package/gulp-plumber>
 [gulp-less]: <https://www.npmjs.com/package/gulp-less>
 [gulp-cssmin]: <https://www.npmjs.com/package/gulp-cssmin>
+[gulp.spritesmith]: <https://www.npmjs.com/package/gulp.spritesmith>

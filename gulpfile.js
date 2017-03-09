@@ -8,9 +8,15 @@ var gulp = require('gulp'),
     gulpif = require('gulp-if'),
     uglify = require('gulp-uglify'),
     del = require('del'),
+	spritesmith = require('gulp.spritesmith'),
+	imagemin = require('gulp-imagemin');
+	buffer = require('vinyl-buffer');
+	csso = require('gulp-csso');
+	merge = require('merge-stream');
 	browserSync = require('browser-sync').create();
 
 const zip = require('gulp-zip');
+
 /*=============================================
 =            Update Bootstrap Core            =
 =============================================*/
@@ -60,8 +66,8 @@ gulp.task('fa-fonts', function() {
 });
 
 /*----------  Task Update  ----------*/
-gulp.task('use-fontawesome', ['fa-less', 'fa-fonts'], function () {});
-gulp.task('update-fontawesome', ['fa-less', 'fa-fonts'], function () {});
+gulp.task('install-fa', ['fa-less', 'fa-fonts'], function () {});
+gulp.task('update-fa', ['fa-less', 'fa-fonts'], function () {});
 
 /*=====  End of Update Font-Awesome  ======*/
 
@@ -106,10 +112,40 @@ gulp.task('dev',['build'], function() {
 
     gulp.watch('app/source/**/*.pug', ['views']);
     gulp.watch('app/less/**/*.less', ['styles']);
+    //gulp.watch('app/imgs/sprites/**/*.png', ['sprites']);
 
     // Reload the browser whenever HTML or JS Files Change
     gulp.watch('app/js/**/*.js', browserSync.reload);
     gulp.watch("app/*.html", browserSync.reload);
+});
+
+
+/*----------  Sprite Images  ----------*/
+
+
+gulp.task('sprites', function () {
+
+	// Generate our spritesheet
+	var spriteData = gulp.src('app/imgs/sprites/*.png')
+	.pipe(spritesmith({
+		imgName: 'sprites.png',
+		cssName: 'sprites.less',
+		algorithm: 'alt-diagonal',
+		imgPath: '../imgs/sprites.png',
+		padding: 2
+	}));
+
+	// Pipe image stream through image optimizer and onto disk
+	var imgStream = spriteData.img
+		.pipe(buffer())
+    	.pipe(imagemin())
+		.pipe(gulp.dest('app/imgs/'))
+		.pipe(browserSync.stream());
+
+	// Pipe CSS stream through CSS optimizer and onto disk
+	var cssStream = spriteData.css.pipe(gulp.dest('app/less/sprites/'));
+
+	return merge(imgStream, cssStream);
 });
 
 /*=====  End of Task for DEV  ======*/
@@ -131,7 +167,7 @@ gulp.task('minify-css-js', function() {
 		.pipe(gulp.dest('dist'));
 })
 
-gulp.task('pre-build',['clean:dist', 'views', 'styles', 'minify-css-js'] , function(){
+gulp.task('pre-build',['clean:dist', 'build', 'minify-css-js'] , function(){
 	gulp.src('app/fonts/**')
 		.pipe(gulp.dest('dist/fonts/'));
 
