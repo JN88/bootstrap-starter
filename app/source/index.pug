@@ -18,16 +18,16 @@ block content
 
         .row
             .col-md-3
-                img.img-responsive(src="holder.js/300x200" alt="logo")
+                img.img-responsive(data-src="holder.js/300x200" alt="logo")
             .col-md-3
-                img.img-responsive(src="holder.js/300x200" alt="logo")
+                img.img-responsive(data-src="holder.js/300x200" alt="logo")
             .col-md-3
-                img.img-responsive(src="holder.js/300x200" alt="logo")
+                img.img-responsive(data-src="holder.js/300x200" alt="logo")
             .col-md-3
-                img.img-responsive(src="holder.js/300x200" alt="logo")
+                img.img-responsive(data-src="holder.js/300x200" alt="logo")
             .col-md-6
     br
-    div.box
+    .box
         .container
             .row
                 .col-md-6
@@ -36,3 +36,52 @@ block content
                 .col-md-6
                     h4 Lorem ipsum dolor sit amet
                     p Consectetur adipisicing elit. Tempore facilis laudantium molestiae. Id rerum commodi officia distinctio natus eius veritatis, praesentium, aspernatur libero sunt, voluptatibus, eveniet aliquid voluptas quam omnis.
+            hr
+            h2 Liquid layout Basic:
+            p This layout type use <code>overflow: hidden</code> for fluid column
+            .layouts.layout-1.clearfix
+                    .fixed-column Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+                    .fluid-column
+                        .inner Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+            .layouts.layout-2.clearfix
+                    .fixed-column Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+                    .fluid-column
+                        .inner Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+            .layouts.layout-3.clearfix
+                    .fixed-left-column Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+                    .fixed-right-column Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+                    .fluid-column
+                        .inner Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+            hr
+            h2 Liquid layout Default
+            p Simple only use <code>float</code>, <code>margin</code> and <code>display</code>
+            .layouts.layout-4.clearfix
+                    .fixed-column Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+                    .fluid-column
+                        .inner Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+            .layouts.layout-5.clearfix
+                    .fixed-column Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+                    .fluid-column
+                        .inner Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+            .layouts.layout-6.clearfix
+                    .fixed-left-column Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+                    .fixed-right-column Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+                    .fluid-column
+                        .inner Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+            hr
+            h2 Liquid layout swap position columns
+            p This layout type will swap position of fixed column and fluid column
+            .layouts.layout-7.clearfix
+                    .fluid-column
+                        .inner Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+                    .fixed-column Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+            .layouts.layout-8.clearfix
+                    .fluid-column
+                        .inner Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+                    .fixed-column Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+            .layouts.layout-9.clearfix
+                    .fluid-column
+                        .inner Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+                    .fixed-left-column Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+                    .fixed-right-column Donec sit amet lacinia risus, ut vehicula ipsum. Phasellus dignissim in nulla nec aliquam. Vestibulum at viverra sapien. Donec tincidunt dapibus leo non laoreet.
+

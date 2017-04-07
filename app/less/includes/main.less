@@ -31,3 +31,77 @@
 //
 // TODO: Modules Style
 //==================================================
+.layouts {
+	margin: 30px 0;
+	background-color: @gray-lighter;
+	padding: 30px 20px 20px;
+	position: relative;
+	&:before {
+		position: absolute;
+		left: 15px;
+		top: -15px;
+		display: inline-block;
+		padding: 5px 10px;
+		.css3(border-radius, 3px);
+		background-color: #fff;
+		border: 1px solid @link-color;
+		font-size: 12px;
+	}
+}
+.layout-1 {
+	&:before {
+		content: "Mixins: #liquid-layout > .fixed-fluid-basic(300px, 30px)";
+	}
+	#liquid-layout > .fixed-fluid-basic(300px, 30px);
+}
+.layout-2 {
+	&:before {
+		content: "Mixins: #liquid-layout > .fluid-fixed-basic(300px, 30px)";
+	}
+	#liquid-layout > .fluid-fixed-basic(300px, 30px);
+}
+.layout-3 {
+	&:before {
+		content: "Mixins: #liquid-layout > .fixed-fluid-fixed-basic(300px, 300px, 30px)";
+	}
+	#liquid-layout > .fixed-fluid-fixed-basic(300px, 300px, 30px);
+}
+
+.layout-4 {
+	&:before {
+		content: "Mixins: #liquid-layout > .fixed-fluid-default(300px, 30px)";
+	}
+	#liquid-layout > .fixed-fluid-default(300px, 30px);
+}
+.layout-5 {
+	&:before {
+		content: "Mixins: #liquid-layout > .fluid-fixed-default(300px, 30px)";
+	}
+	#liquid-layout > .fluid-fixed-default(300px, 30px);
+}
+.layout-6 {
+	&:before {
+		content: "Mixins: #liquid-layout > .fixed-fluid-fixed-default(300px, 300px, 30px)";
+	}
+	#liquid-layout > .fixed-fluid-fixed-default(300px, 300px, 30px);
+}
+
+.layout-7 {
+	&:before {
+		content: "Mixins: #liquid-layout > .fixed-fluid-swap(300px, 30px)";
+	}
+	#liquid-layout > .fixed-fluid-swap(300px, 30px);
+}
+.layout-8 {
+	&:before {
+		content: "Mixins: #liquid-layout > .fluid-fixed-swap(300px, 30px)";
+	}
+	#liquid-layout > .fluid-fixed-swap(300px, 30px);
+}
+.layout-9 {
+	&:before {
+		content: "Mixins: #liquid-layout > .fixed-fluid-fixed-default(300px, 300px, 30px)";
+	}
+	#liquid-layout > .fixed-fluid-fixed-swap(300px, 300px, 30px);
+}
+

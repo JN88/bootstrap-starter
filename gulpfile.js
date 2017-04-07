@@ -78,7 +78,12 @@ gulp.task('update-fa', ['fa-less', 'fa-fonts'], function () {});
 
 gulp.task('views', function buildHTML() {
 	return gulp.src('app/source/*.pug')
-	.pipe(plumber())
+	.pipe(plumber({
+		errorHandler: function (err) {
+			console.log(err);
+			this.emit('end');
+		}
+	}))
 	.pipe(pug({
 		pretty: true
 	}))
@@ -87,8 +92,13 @@ gulp.task('views', function buildHTML() {
 });
 
 gulp.task('styles', function() {
-    return gulp.src('app/less/*.less')
-    .pipe(plumber())
+	return gulp.src('app/less/*.less')
+	.pipe(plumber({
+		errorHandler: function (err) {
+			console.log(err);
+			this.emit('end');
+		}
+	}))
 	.pipe(less({
 		sourceMap: {
 			sourceMapRootpath: 'app/less'
