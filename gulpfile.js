@@ -76,6 +76,7 @@ gulp.task('update-fa', ['fa-less', 'fa-fonts'], function () {});
 =            Task for DEV            =
 ====================================*/
 
+/*----------  VIEWS  ----------*/
 gulp.task('views', function buildHTML() {
 	return gulp.src('app/source/*.pug')
 	.pipe(plumber({
@@ -91,48 +92,27 @@ gulp.task('views', function buildHTML() {
 	.pipe(browserSync.stream());
 });
 
-gulp.task('styles', function() {
-	return gulp.src('app/less/*.less')
+/*----------  VIEWS-SKIP  ----------*/
+gulp.task('build-skip', function buildHTML() {
+	return gulp.src('app/source/*.skip')
 	.pipe(plumber({
 		errorHandler: function (err) {
 			console.log(err);
 			this.emit('end');
 		}
 	}))
-	.pipe(less({
-		sourceMap: {
-			sourceMapRootpath: 'app/less'
-		}
+	.pipe(pug({
+		pretty: true
 	}))
-	.pipe(sourcemaps.write())
-    .pipe(gulp.dest('app/css/'))
-    .pipe(browserSync.stream());
+	.pipe(gulp.dest('app'))
+	.pipe(browserSync.stream());
 });
 
-
-gulp.task('build', ['views', 'styles'], function(){});
-
-/*----------  Task Build DEV MODE  ----------*/
-
-gulp.task('dev',['build'], function() {
-	browserSync.init({
-		server: "app/",
-		//reloadDelay: 1000,
-	});
-
-    gulp.watch('app/source/**/*.pug', ['views']);
-    gulp.watch('app/less/**/*.less', ['styles']);
-    //gulp.watch('app/imgs/sprites/**/*.png', ['sprites']);
-
-    // Reload the browser whenever HTML or JS Files Change
-    gulp.watch('app/js/**/*.js', browserSync.reload);
-    gulp.watch("app/*.html", browserSync.reload);
-});
+/*----------  STYLE  ----------*/
 
 
-/*----------  Sprite Images  ----------*/
 
-
+/*----------  SPRITES  ----------*/
 gulp.task('sprites', function () {
 
 	// Generate our spritesheet
@@ -158,6 +138,22 @@ gulp.task('sprites', function () {
 	return merge(imgStream, cssStream);
 });
 
+/*----------  Task Build DEV MODE  ----------*/
+gulp.task('dev',['views', 'views-skip', 'styles'], function() {
+	browserSync.init({
+		server: "app/",
+		//reloadDelay: 1000,
+	});
+
+    gulp.watch('app/source/**/*.pug', ['views']);
+    gulp.watch('app/less/**/*.less', ['styles']);
+    //gulp.watch('app/imgs/sprites/**/*.png', ['sprites']);
+
+    // Reload the browser whenever HTML or JS Files Change
+    gulp.watch('app/js/**/*.js', browserSync.reload);
+    gulp.watch("app/*.html", browserSync.reload);
+});
+
 /*=====  End of Task for DEV  ======*/
 
 
@@ -177,7 +173,15 @@ gulp.task('minify-css-js', function() {
 		.pipe(gulp.dest('dist'));
 })
 
-gulp.task('pre-build',['clean:dist', 'build', 'minify-css-js'] , function(){
+gulp.task('build-zip', function() {
+
+	return gulp.src('dist/*')
+	    .pipe(zip('./dist.zip'))
+	    .pipe(gulp.dest('./'));
+
+});
+
+gulp.task('public',['clean:dist', 'views', 'views-skip', 'styles', 'minify-css-js'] , function(){
 	gulp.src('app/fonts/**')
 		.pipe(gulp.dest('dist/fonts/'));
 
@@ -188,21 +192,13 @@ gulp.task('pre-build',['clean:dist', 'build', 'minify-css-js'] , function(){
 		.pipe(gulp.dest('dist/imgs/'));
 });
 
-gulp.task('build-zip', function() {
-
-	return gulp.src('dist/*')
-	    .pipe(zip('./dist.zip'))
-	    .pipe(gulp.dest('./'));
-
-});
-
-gulp.task('public',['pre-build'] , function() {});
-
-gulp.task('dist',['build', 'public'], function() {
+gulp.task('dist',['views', 'views-skip', 'styles', 'public'], function() {
    browserSync.init({
 		server: "dist/"
 	});
 });
+
+gulp.task('default', ['install', 'dev'], function(){});
 
 /*=====  End of TASK  FOR DIST MODE  ======*/
 
