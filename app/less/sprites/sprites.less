@@ -1,0 +1,241 @@
+/*
+LESS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: @icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+@icon-home: x y offset_x offset_y width height total_width total_height image_path name;
+
+At the bottom of this section, we provide information about the spritesheet itself
+@spritesheet: width height image @spritesheet-sprites;
+*/
+@icon-intro-pen-name: 'icon-intro-pen';
+@icon-intro-pen-x: 555px;
+@icon-intro-pen-y: 0px;
+@icon-intro-pen-offset-x: -555px;
+@icon-intro-pen-offset-y: 0px;
+@icon-intro-pen-width: 182px;
+@icon-intro-pen-height: 217px;
+@icon-intro-pen-total-width: 737px;
+@icon-intro-pen-total-height: 601px;
+@icon-intro-pen-image: '../imgs/sprites.png';
+@icon-intro-pen: 555px 0px -555px 0px 182px 217px 737px 601px '../imgs/sprites.png' 'icon-intro-pen';
+@icon-obj-sticky-name: 'icon-obj-sticky';
+@icon-obj-sticky-x: 0px;
+@icon-obj-sticky-y: 0px;
+@icon-obj-sticky-offset-x: 0px;
+@icon-obj-sticky-offset-y: 0px;
+@icon-obj-sticky-width: 553px;
+@icon-obj-sticky-height: 462px;
+@icon-obj-sticky-total-width: 737px;
+@icon-obj-sticky-total-height: 601px;
+@icon-obj-sticky-image: '../imgs/sprites.png';
+@icon-obj-sticky: 0px 0px 0px 0px 553px 462px 737px 601px '../imgs/sprites.png' 'icon-obj-sticky';
+@icon-sum-next-prev-name: 'icon-sum-next-prev';
+@icon-sum-next-prev-x: 555px;
+@icon-sum-next-prev-y: 219px;
+@icon-sum-next-prev-offset-x: -555px;
+@icon-sum-next-prev-offset-y: -219px;
+@icon-sum-next-prev-width: 54px;
+@icon-sum-next-prev-height: 92px;
+@icon-sum-next-prev-total-width: 737px;
+@icon-sum-next-prev-total-height: 601px;
+@icon-sum-next-prev-image: '../imgs/sprites.png';
+@icon-sum-next-prev: 555px 219px -555px -219px 54px 92px 737px 601px '../imgs/sprites.png' 'icon-sum-next-prev';
+@icon-tree-top-name: 'icon-tree-top';
+@icon-tree-top-x: 0px;
+@icon-tree-top-y: 464px;
+@icon-tree-top-offset-x: 0px;
+@icon-tree-top-offset-y: -464px;
+@icon-tree-top-width: 233px;
+@icon-tree-top-height: 137px;
+@icon-tree-top-total-width: 737px;
+@icon-tree-top-total-height: 601px;
+@icon-tree-top-image: '../imgs/sprites.png';
+@icon-tree-top: 0px 464px 0px -464px 233px 137px 737px 601px '../imgs/sprites.png' 'icon-tree-top';
+@icon-intro-pen-2x-name: 'icon-intro-pen@2x';
+@icon-intro-pen-2x-x: 1110px;
+@icon-intro-pen-2x-y: 0px;
+@icon-intro-pen-2x-offset-x: -1110px;
+@icon-intro-pen-2x-offset-y: 0px;
+@icon-intro-pen-2x-width: 364px;
+@icon-intro-pen-2x-height: 434px;
+@icon-intro-pen-2x-total-width: 1474px;
+@icon-intro-pen-2x-total-height: 1202px;
+@icon-intro-pen-2x-image: '../imgs/sprite@2x.png';
+@icon-intro-pen-2x: 1110px 0px -1110px 0px 364px 434px 1474px 1202px '../imgs/sprite@2x.png' 'icon-intro-pen@2x';
+@icon-obj-sticky-2x-name: 'icon-obj-sticky@2x';
+@icon-obj-sticky-2x-x: 0px;
+@icon-obj-sticky-2x-y: 0px;
+@icon-obj-sticky-2x-offset-x: 0px;
+@icon-obj-sticky-2x-offset-y: 0px;
+@icon-obj-sticky-2x-width: 1106px;
+@icon-obj-sticky-2x-height: 924px;
+@icon-obj-sticky-2x-total-width: 1474px;
+@icon-obj-sticky-2x-total-height: 1202px;
+@icon-obj-sticky-2x-image: '../imgs/sprite@2x.png';
+@icon-obj-sticky-2x: 0px 0px 0px 0px 1106px 924px 1474px 1202px '../imgs/sprite@2x.png' 'icon-obj-sticky@2x';
+@icon-sum-next-prev-2x-name: 'icon-sum-next-prev@2x';
+@icon-sum-next-prev-2x-x: 1110px;
+@icon-sum-next-prev-2x-y: 438px;
+@icon-sum-next-prev-2x-offset-x: -1110px;
+@icon-sum-next-prev-2x-offset-y: -438px;
+@icon-sum-next-prev-2x-width: 108px;
+@icon-sum-next-prev-2x-height: 184px;
+@icon-sum-next-prev-2x-total-width: 1474px;
+@icon-sum-next-prev-2x-total-height: 1202px;
+@icon-sum-next-prev-2x-image: '../imgs/sprite@2x.png';
+@icon-sum-next-prev-2x: 1110px 438px -1110px -438px 108px 184px 1474px 1202px '../imgs/sprite@2x.png' 'icon-sum-next-prev@2x';
+@icon-tree-top-2x-name: 'icon-tree-top@2x';
+@icon-tree-top-2x-x: 0px;
+@icon-tree-top-2x-y: 928px;
+@icon-tree-top-2x-offset-x: 0px;
+@icon-tree-top-2x-offset-y: -928px;
+@icon-tree-top-2x-width: 466px;
+@icon-tree-top-2x-height: 274px;
+@icon-tree-top-2x-total-width: 1474px;
+@icon-tree-top-2x-total-height: 1202px;
+@icon-tree-top-2x-image: '../imgs/sprite@2x.png';
+@icon-tree-top-2x: 0px 928px 0px -928px 466px 274px 1474px 1202px '../imgs/sprite@2x.png' 'icon-tree-top@2x';
+@spritesheet-width: 737px;
+@spritesheet-height: 601px;
+@spritesheet-image: '../imgs/sprites.png';
+@spritesheet-sprites: @icon-intro-pen @icon-obj-sticky @icon-sum-next-prev @icon-tree-top;
+@spritesheet: 737px 601px '../imgs/sprites.png' @spritesheet-sprites;
+@retina-spritesheet-width: 1474px;
+@retina-spritesheet-height: 1202px;
+@retina-spritesheet-image: '../imgs/sprite@2x.png';
+@retina-spritesheet-sprites: @icon-intro-pen-2x @icon-obj-sticky-2x @icon-sum-next-prev-2x @icon-tree-top-2x;
+@retina-spritesheet: 1474px 1202px '../imgs/sprite@2x.png' @retina-spritesheet-sprites;
+
+/*
+These "retina group" variables are mappings for the naming and pairing of normal and retina sprites.
+
+The list formatted variables are intended for mixins like `retina-sprite` and `retina-sprites`.
+*/
+@icon-intro-pen-group-name: 'icon-intro-pen';
+@icon-intro-pen-group: 'icon-intro-pen' @icon-intro-pen @icon-intro-pen-2x;
+@icon-obj-sticky-group-name: 'icon-obj-sticky';
+@icon-obj-sticky-group: 'icon-obj-sticky' @icon-obj-sticky @icon-obj-sticky-2x;
+@icon-sum-next-prev-group-name: 'icon-sum-next-prev';
+@icon-sum-next-prev-group: 'icon-sum-next-prev' @icon-sum-next-prev @icon-sum-next-prev-2x;
+@icon-tree-top-group-name: 'icon-tree-top';
+@icon-tree-top-group: 'icon-tree-top' @icon-tree-top @icon-tree-top-2x;
+@retina-groups: @icon-intro-pen-group @icon-obj-sticky-group @icon-sum-next-prev-group @icon-tree-top-group;
+
+/*
+The provided classes are intended to be used with the array-like variables
+
+.icon-home {
+  .sprite-width(@icon-home);
+}
+.icon-email {
+  .sprite(@icon-email);
+}
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+.sprite-width(@sprite) {
+  width: extract(@sprite, 5);
+}
+
+.sprite-height(@sprite) {
+  height: extract(@sprite, 6);
+}
+
+.sprite-position(@sprite) {
+  @sprite-offset-x: extract(@sprite, 3);
+  @sprite-offset-y: extract(@sprite, 4);
+  background-position: @sprite-offset-x @sprite-offset-y;
+}
+
+.sprite-image(@sprite) {
+  @sprite-image: extract(@sprite, 9);
+  @sprite-image-bare: ~`"@{sprite-image}".slice(1, -1)`;
+  background-image: url(@sprite-image-bare);
+}
+
+.sprite(@sprite) {
+  .sprite-image(@sprite);
+  .sprite-position(@sprite);
+  .sprite-width(@sprite);
+  .sprite-height(@sprite);
+}
+
+/*
+The `retina-sprite` class sets up rules and a media query for a sprite/retina sprite.
+  It should be used with a "retina group" variable.
+
+The media query is from CSS Tricks: https://css-tricks.com/snippets/css/retina-display-media-query/
+
+@icon-home-group: 'icon-home' @icon-home @icon-home-2x;
+
+.icon-home {
+  .retina-sprite(@icon-home-group);
+}
+*/
+.sprite-background-size(@sprite) {
+  @sprite-total-width: extract(@sprite, 7);
+  @sprite-total-height: extract(@sprite, 8);
+  background-size: @sprite-total-width @sprite-total-height;
+}
+
+.retina-sprite(@retina-group) {
+  @normal-sprite: extract(@retina-group, 2);
+  @retina-sprite: extract(@retina-group, 3);
+  .sprite(@normal-sprite);
+
+  @media (-webkit-min-device-pixel-ratio: 2),
+         (min-resolution: 192dpi) {
+    .sprite-image(@retina-sprite);
+    .sprite-background-size(@normal-sprite);
+  }
+}
+
+/*
+The `.sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of LESS
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+.sprites(@spritesheet-sprites);
+*/
+.sprites(@sprites, @i: 1) when (@i <= length(@sprites)) {
+  @sprite: extract(@sprites, @i);
+  @sprite-name: e(extract(@sprite, 10));
+  .@{sprite-name} {
+    .sprite(@sprite);
+  }
+  .sprites(@sprites, @i + 1);
+}
+
+/*
+The `.retina-sprites` mixin generates a CSS rule and media query for retina groups
+  This yields the same output as CSS retina template but can be overridden in LESS
+
+.retina-sprites(@retina-groups);
+*/
+.retina-sprites(@retina-groups, @i: 1) when (@i <= length(@retina-groups)) {
+  @retina-group: extract(@retina-groups, @i);
+  @sprite-name: e(extract(@retina-group, 1));
+  .@{sprite-name} {
+    .retina-sprite(@retina-group);
+  }
+  .retina-sprites(@retina-groups, @i + 1);
+}

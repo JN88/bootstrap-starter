@@ -109,7 +109,18 @@ gulp.task('build-skip', function buildHTML() {
 });
 
 /*----------  STYLE  ----------*/
-
+gulp.task('styles', function() {
+    return gulp.src('app/less/*.less')
+    .pipe(plumber())
+	.pipe(less({
+		sourceMap: {
+			sourceMapRootpath: 'app/less'
+		}
+	}))
+	.pipe(sourcemaps.write())
+    .pipe(gulp.dest('app/css/'))
+    .pipe(browserSync.stream());
+});
 
 
 /*----------  SPRITES  ----------*/
@@ -120,9 +131,11 @@ gulp.task('sprites', function () {
 	.pipe(spritesmith({
 		imgName: 'sprites.png',
 		cssName: 'sprites.less',
-		algorithm: 'alt-diagonal',
 		imgPath: '../imgs/sprites.png',
-		padding: 2
+		retinaSrcFilter: ['app/imgs/sprites/*@2x.png'],
+		retinaImgName: 'sprite@2x.png',
+		retinaImgPath: '../imgs/sprite@2x.png',
+		padding: 2,
 	}));
 
 	// Pipe image stream through image optimizer and onto disk
@@ -139,7 +152,7 @@ gulp.task('sprites', function () {
 });
 
 /*----------  Task Build DEV MODE  ----------*/
-gulp.task('dev',['views', 'views-skip', 'styles'], function() {
+gulp.task('dev',['sprites', 'views', 'build-skip', 'styles'], function() {
 	browserSync.init({
 		server: "app/",
 		//reloadDelay: 1000,
@@ -147,7 +160,7 @@ gulp.task('dev',['views', 'views-skip', 'styles'], function() {
 
     gulp.watch('app/source/**/*.pug', ['views']);
     gulp.watch('app/less/**/*.less', ['styles']);
-    //gulp.watch('app/imgs/sprites/**/*.png', ['sprites']);
+    gulp.watch('app/imgs/sprites/**/*.png', ['sprites']);
 
     // Reload the browser whenever HTML or JS Files Change
     gulp.watch('app/js/**/*.js', browserSync.reload);
@@ -181,7 +194,7 @@ gulp.task('build-zip', function() {
 
 });
 
-gulp.task('public',['clean:dist', 'views', 'views-skip', 'styles', 'minify-css-js'] , function(){
+gulp.task('public',['clean:dist', 'views', 'build-skip', 'styles', 'minify-css-js'] , function(){
 	gulp.src('app/fonts/**')
 		.pipe(gulp.dest('dist/fonts/'));
 
@@ -192,7 +205,7 @@ gulp.task('public',['clean:dist', 'views', 'views-skip', 'styles', 'minify-css-j
 		.pipe(gulp.dest('dist/imgs/'));
 });
 
-gulp.task('dist',['views', 'views-skip', 'styles', 'public'], function() {
+gulp.task('dist',['views', 'build-skip', 'styles', 'public'], function() {
    browserSync.init({
 		server: "dist/"
 	});
