@@ -9,13 +9,15 @@ block script
 block content
     .container
         .jumbotron.text-center
-            i.icon.icon-intro-pen
-            h1 Bootstrap Starter
             p
-                a.btn.btn-primary(href='https://github.com/JN88/bootstrap-starter/archive/master.zip', role='button', target="_blank") Download
+                i.svg-icon.svg-icon-icodervn
+            h1 Bootstrap Starter
+            br
+            p
+                a.btn.btn-lg.btn-primary(href='https://github.com/JN88/bootstrap-starter/archive/master.zip', role='button', target="_blank") Download
                 |
                 |
-                a.btn.btn-primary(href='https://github.com/JN88/bootstrap-starter', role='button', target="_blank") View Github
+                a.btn.btn-lg.btn-primary(href='https://github.com/JN88/bootstrap-starter', role='button', target="_blank") View Github
 
         .row
             .col-md-3
@@ -27,17 +29,27 @@ block content
             .col-md-3
                 img.img-responsive(data-src="holder.js/300x200" alt="logo")
             .col-md-6
-    br
+        hr
+        .row
+            .col-md-6
+                h2 Image Sprites:
+                p Convert a set of images into a spritesheet and CSS variables via <a target="_blank" href="https://www.npmjs.com/package/gulp.spritesmith">gulp.spritesmith</a>
+                p
+                    i.icon.icon-facebook.margin-right-10
+                    i.icon.icon-twitter.margin-right-10
+                    i.icon.icon-google-plus.margin-right-10
+                    i.icon.icon-youtube
+            .col-md-6
+                h2 SVG Sprites:
+                p Convert a set of svg images into a spritesheet and CSS variables via <a target="_blank" href="https://www.npmjs.com/package/gulp-svg-sprites">gulp-svg-sprites</a>
+                p
+                    i.svg-icon.svg-icon-facebook.margin-right-10
+                    i.svg-icon.svg-icon-twitter.margin-right-10
+                    i.svg-icon.svg-icon-google-plus.margin-right-10
+                    i.svg-icon.svg-icon-youtube
+        hr
     .box
         .container
-            .row
-                .col-md-6
-                    h4 Lorem ipsum dolor sit amet
-                    p Consectetur adipisicing elit. Tempore facilis laudantium molestiae. Id rerum commodi officia distinctio natus eius veritatis, praesentium, aspernatur libero sunt, voluptatibus, eveniet aliquid voluptas quam omnis.
-                .col-md-6
-                    h4 Lorem ipsum dolor sit amet
-                    p Consectetur adipisicing elit. Tempore facilis laudantium molestiae. Id rerum commodi officia distinctio natus eius veritatis, praesentium, aspernatur libero sunt, voluptatibus, eveniet aliquid voluptas quam omnis.
-            hr
             h2 Liquid layout Basic:
             p This layout type use <code>overflow: hidden</code> for fluid column
             .layouts.layout-1.clearfix

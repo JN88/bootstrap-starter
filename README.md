@@ -1,75 +1,68 @@
 # Bootstrap-Starter
 
-Supper-Bootstrap be build base on the framework [Twitter Bootstrap] and integrated [Font Awesome] with latest vertion.
+Bootstrap-Starter be build base on the framework [Twitter Bootstrap] and integrated [Font Awesome] with latest version. Moreover Bootstrap-Starter help you resolve problems about: image sprite, svg sprite, layout responsive.
 
 ### Featured Gulp Packages using
-[gulp-pug], [gulp-less], [browser-sync], [gulp-plumber], [gulp-cssmin], [gulp.spritesmith]
+[gulp-pug] - Enables you to compile your Pug templates into HTML or JS.
+[gulp-less] - A LESS plugin for Gulp help you compile Less to CSS.
+[browser-sync] - Keep multiple browsers & devices in sync when building websites.
+[gulp-plumber] - Prevent pipe breaking caused by errors from gulp plugins.
+[gulp-cssmin] - Plugin to minify CSS, using clean-css.
+[gulp.spritesmith] - Generate an IMAGE (jpg, png) sprite sheet. Retina support.
+[gulp-svg-sprites] - Generate an SVG sprite sheet.
 
-### Installation
-
+### Install Project
+**I. Install Gulp**
 ```sh
 $ npm i -g gulp
 ```
-Install the dependencies:
+**II. Install the dependencies:**
 ```sh
 npm install
 ```
-
-### Install Project
-Default will intergrade Bootstrap latest vertion
+**III.  Install Bootstrap**
+Intergrade Bootstrap
 ```sh
-gulp install
+gulp install-bootstrap
 ```
 
-### Develop
-Run command below to work:
-```sh
-gulp dev
-```
-
-### Update Bootstrap
-Update bootstrap latest vertion:
+Update Bootstrap latest version
 ```sh
 gulp update-bootstrap
 ```
 
-### Intergrade Font-Awesome
-Intergrade Font-Awesome latest vertion:
+**IV. Intergrade Font-Awesome**
+Intergrade Font-Awesome:
 ```sh
 gulp install-fa
 ```
-
-Update Font-Awesome latest vertion:
+Update **Font-Awesome** latest version:
 ```sh
 gulp update-fa
 ```
 
-### Config auto build sprites image
-Open file gulpfile.js find and remove comment
-```js
-//gulp.watch('app/imgs/sprites/**/*.png', ['sprites']);
-```
-
-Open file style.less find and remove comment
-```less
-//@import "sprites/sprites.less";
-```
-
-Open file main.less find and remove comment
-```less
-// Init Sprites Style
-//[class^="icon-"] {
-//	display: inline-block;
-//	vertical-align: middle;
-//}
-//.sprites(@spritesheet-sprites);
+### Development
+Run command below to work:
+```sh
+gulp watch
 ```
 
 ### Build Dist
-Create dist folder and dist.zip
+Create dist folder and **dist.zip**
 ```sh
 gulp public
 ```
+
+### Preview Dist
+```sh
+gulp dist
+```
+
+### Note
+If you not use [Font Awesome], [gulp.spritesmith] or [gulp-svg-sprites] please comment or remove 
+Related codes to avoid error when you build project.
+Related files: gulpfile.js, style.less, main.less
+
 
 [Font Awesome]: <http://fortawesome.github.io/Font-Awesome/>
 [Twitter Bootstrap]: <http://getbootstrap.com/>
@@ -80,3 +73,4 @@ gulp public
 [gulp-less]: <https://www.npmjs.com/package/gulp-less>
 [gulp-cssmin]: <https://www.npmjs.com/package/gulp-cssmin>
 [gulp.spritesmith]: <https://www.npmjs.com/package/gulp.spritesmith>
+[gulp-svg-sprites]: <https://www.npmjs.com/package/gulp-svg-sprites>

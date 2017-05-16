@@ -1,19 +1,21 @@
-var gulp = require('gulp'),
-	plumber = require('gulp-plumber'),
-	less = require('gulp-less'),
-    minifyCss = require('gulp-clean-css'),
-	pug = require('gulp-pug'),
-	sourcemaps = require('gulp-sourcemaps'),
-    useref = require('gulp-useref'),
-    gulpif = require('gulp-if'),
-    uglify = require('gulp-uglify'),
-    del = require('del'),
-	spritesmith = require('gulp.spritesmith'),
-	imagemin = require('gulp-imagemin');
-	buffer = require('vinyl-buffer');
-	csso = require('gulp-csso');
-	merge = require('merge-stream');
-	browserSync = require('browser-sync').create();
+var gulp 			=	require('gulp'),
+	plumber 		=	require('gulp-plumber'),
+	less 			=	require('gulp-less'),
+    minifyCss 		=	require('gulp-clean-css'),
+	pug 			=	require('gulp-pug'),
+	sourcemaps 		=	require('gulp-sourcemaps'),
+    useref 			=	require('gulp-useref'),
+    gulpif 			=	require('gulp-if'),
+    uglify 			=	require('gulp-uglify'),
+    del 			=	require('del'),
+	spritesmith 	=	require('gulp.spritesmith'),
+	imagemin 		=	require('gulp-imagemin');
+	buffer 			=	require('vinyl-buffer');
+	csso 			=	require('gulp-csso');
+	merge 			=	require('merge-stream');
+	svgSprite 		=	require("gulp-svg-sprites");
+	runSequence 	=	require('run-sequence');
+	browserSync 	=	require('browser-sync').create();
 
 const zip = require('gulp-zip');
 
@@ -25,14 +27,17 @@ gulp.task('bwt-less', function() {
 	return gulp.src('node_modules/bootstrap/less/**/*.less')
 	.pipe(gulp.dest('app/less/bootstrap/'));
 });
+
 gulp.task('bwt-js', function() {
 	return gulp.src('node_modules/bootstrap/dist/js/bootstrap.min.js')
 	.pipe(gulp.dest('app/js/bootstrap/'));
 });
+
 gulp.task('bwt-fonts', function() {
 	return gulp.src('node_modules/bootstrap/fonts/*.*')
 	.pipe(gulp.dest('app/fonts/bootstrap/'));
 });
+
 gulp.task('font-awesome', function() {
     gulp.src('node_modules/font-awesome/fonts/**/*')
 		.pipe(gulp.dest('app/fonts/font-awesome/'));
@@ -46,7 +51,7 @@ gulp.task('update-bootstrap', ['bwt-less', 'bwt-js', 'bwt-fonts'], function () {
     console.log("\n [>] Update Bootstrap DONE ^.^ \n");
 });
 
-gulp.task('install', ['update-bootstrap'], function() {
+gulp.task('install-bootstrap', ['update-bootstrap'], function() {
 	console.log("\n [>] Install project DONE ^.^ \n");
 });
 
@@ -123,23 +128,28 @@ gulp.task('styles', function() {
 });
 
 
-/*----------  SPRITES  ----------*/
-gulp.task('sprites', function () {
+/*----------  IMAGE SPRITE  ----------*/
+gulp.task('img-sprite', function () {
 
 	// Generate our spritesheet
 	var spriteData = gulp.src('app/imgs/sprites/*.png')
 	.pipe(spritesmith({
 		imgName: 'sprites.png',
+		selector: "svg-%f",
 		cssName: 'sprites.less',
 		imgPath: '../imgs/sprites.png',
+		padding: 2,
+
+		// Config For 2x images
 		retinaSrcFilter: ['app/imgs/sprites/*@2x.png'],
 		retinaImgName: 'sprite@2x.png',
-		retinaImgPath: '../imgs/sprite@2x.png',
-		padding: 2,
+		retinaImgPath: '../imgs/sprite@2x.png'
+
 	}));
 
 	// Pipe image stream through image optimizer and onto disk
 	var imgStream = spriteData.img
+		.pipe(plumber())
 		.pipe(buffer())
     	.pipe(imagemin())
 		.pipe(gulp.dest('app/imgs/'))
@@ -151,8 +161,28 @@ gulp.task('sprites', function () {
 	return merge(imgStream, cssStream);
 });
 
+/*----------  SVG SPRITE  ----------*/
+gulp.task('svg-sprite', function () {
+    return gulp.src('app/imgs/sprites-svg/*.svg')
+        .pipe(svgSprite({
+        	common: "svg-icon",
+        	selector: "svg-%f",
+            cssFile: "../less/sprites/sprites-svg.less",
+            svgPath: "../imgs/%f",
+            svg: {
+                sprite: "sprites-svg.svg"
+            },
+
+            preview: false
+            /*preview: {
+                sprite: "test.html"
+            }*/
+        }))
+        .pipe(gulp.dest("app/imgs/"));
+});
+
 /*----------  Task Build DEV MODE  ----------*/
-gulp.task('dev',['sprites', 'views', 'build-skip', 'styles'], function() {
+gulp.task('watch',['img-sprite', 'svg-sprite', 'views', 'build-skip', 'styles'], function() {
 	browserSync.init({
 		server: "app/",
 		//reloadDelay: 1000,
@@ -160,7 +190,8 @@ gulp.task('dev',['sprites', 'views', 'build-skip', 'styles'], function() {
 
     gulp.watch('app/source/**/*.pug', ['views']);
     gulp.watch('app/less/**/*.less', ['styles']);
-    gulp.watch('app/imgs/sprites/**/*.png', ['sprites']);
+    gulp.watch('app/imgs/sprites/**/*.png', ['img-sprite']);
+    gulp.watch('app/imgs/sprites/sprites-svg/**/*.svg', ['svg-sprite']);
 
     // Reload the browser whenever HTML or JS Files Change
     gulp.watch('app/js/**/*.js', browserSync.reload);
@@ -211,7 +242,7 @@ gulp.task('dist',['views', 'build-skip', 'styles', 'public'], function() {
 	});
 });
 
-gulp.task('default', ['install', 'dev'], function(){});
+gulp.task('default', ['install-bootstrap', 'watch'], function(){});
 
 /*=====  End of TASK  FOR DIST MODE  ======*/
 
