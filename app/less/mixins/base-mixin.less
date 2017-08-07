@@ -15,31 +15,31 @@
 // --------------------------------------------------
 .css3(
 	@_property,
-    @_value,
-    @_prefix: true
+	@_value,
+	@_prefix: true
 ) when (@_prefix = true)
-  and not (@_value = '')
-  and not (@_value = false)
-  and not (extract(@_value, 1) = false)
-  and not (extract(@_value, 2) = false)
-  and not (extract(@_value, 3) = false)
-  and not (extract(@_value, 4) = false)
-  and not (extract(@_value, 5) = false) {
-	-webkit-@{_property}: @_value;
-	-moz-@{_property}: @_value;
-	-ms-@{_property}: @_value;
+	and not (@_value = '')
+	and not (@_value = false)
+	and not (extract(@_value, 1) = false)
+	and not (extract(@_value, 2) = false)
+	and not (extract(@_value, 3) = false)
+	and not (extract(@_value, 4) = false)
+	and not (extract(@_value, 5) = false) {
+		-webkit-@{_property}: @_value;
+		-moz-@{_property}: @_value;
+		-ms-@{_property}: @_value;
 }
 .css3(
 	@_property,
-    @_value,
-    @_prefix: true
+	@_value,
+	@_prefix: true
 ) when not (@_value = '')
-  and not (@_value = false)
-  and not (extract(@_value, 1) = false)
-  and not (extract(@_value, 2) = false)
-  and not (extract(@_value, 3) = false)
-  and not (extract(@_value, 4) = false)
-  and not (extract(@_value, 5) = false) {
+	and not (@_value = false)
+	and not (extract(@_value, 1) = false)
+	and not (extract(@_value, 2) = false)
+	and not (extract(@_value, 3) = false)
+	and not (extract(@_value, 4) = false)
+	and not (extract(@_value, 5) = false) {
 		@{_property}: @_value;
 }
 
@@ -49,6 +49,27 @@
 //
 // MIXIN: Set Postion
 // --------------------------------------------------
+.pos-left-top(@position: absolute){
+	position: @position;
+	top: 0;
+	left: 0;
+}
+.pos-left-bottom(@position: absolute){
+	position: @position;
+	bottom: 0;
+	left: 0;
+}
+.pos-right-top(@position: absolute){
+	position: @position;
+	top: 0;
+	right: 0;
+}
+.pos-right-bottom(@position: absolute){
+	position: @position;
+	bottom: 0;
+	right: 0;
+}
+
 .pos-center-center(@position: absolute){
 	position: @position;
 	top: 50%;
@@ -67,18 +88,20 @@
 	left: 50%;
 	.translate(-50%, 0);
 }
-.pos-top-center(@position: absolute){
+
+.pos-left-center(@position: absolute){
 	position: @position;
-	top: 0;
-	left: 50%;
+	left: 0;
+	top: 50%;
 	.translate(0, -50%);
 }
-.pos-bottom-center(@position: absolute){
+.pos-right-center(@position: absolute){
 	position: @position;
-	bottom: 0;
-	left: 50%;
+	right: 0;
+	top: 50%;
 	.translate(0, -50%);
 }
+
 
 // MIXIN: Set Margin And Padding
 // --------------------------------------------------
@@ -131,7 +154,10 @@
 .export-sprite-icon(@icon-name) {
 	@with: ~'@{icon-name}-width';
 	@height: ~'@{icon-name}-height';
+	@total-width: ~'@{icon-name}-total-width';
+	@total-height: ~'@{icon-name}-total-height';
 	@background-image: ~'@{icon-name}-image';
+	@background-2x-image: ~'@{icon-name}-2x-image';
 	@x: ~'@{icon-name}-offset-x';
 	@y: ~'@{icon-name}-offset-y';
 	display: inline-block;
@@ -139,4 +165,15 @@
 	width: @@with;
 	height: @@height;
 	background: url(@@background-image) no-repeat @@x @@y transparent;
+
+	@media
+	only screen and (-webkit-min-device-pixel-ratio: 2),
+	only screen and (   min--moz-device-pixel-ratio: 2),
+	only screen and (     -o-min-device-pixel-ratio: 2/1),
+	only screen and (        min-device-pixel-ratio: 2),
+	only screen and (                min-resolution: 192dpi),
+	only screen and (                min-resolution: 2dppx) {
+		background-image: url(@@background-2x-image);
+		background-size: @@total-width @@total-height;
+	}
 }
