@@ -136,7 +136,7 @@ gulp.task('img-sprite', function () {
 	.pipe(spritesmith({
 		imgName: 'sprites.png',
 		selector: "svg-%f",
-		cssName: 'sprites.less',
+		cssName: '_sprites.less',
 		imgPath: '../imgs/sprites.png',
 		padding: 2,
 
@@ -167,7 +167,7 @@ gulp.task('svg-sprite', function () {
         .pipe(svgSprite({
         	common: "svg-icon",
         	selector: "svg-%f",
-            cssFile: "../less/sprites/sprites-svg.less",
+            cssFile: "../less/sprites/_sprites-svg.less",
             svgPath: "../imgs/%f",
             svg: {
                 sprite: "sprites-svg.svg"

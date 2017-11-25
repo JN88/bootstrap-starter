@@ -149,6 +149,13 @@
 	}
 }
 
+.link-text-color(@color: @text-color, @colorHover: @link-color){
+	color: @color;
+	&:hover {
+		color: @colorHover;
+	}
+}
+
 // MIXIN: Genarate single icon form Spritesmith
 // --------------------------------------------------
 .export-sprite-icon(@icon-name) {
